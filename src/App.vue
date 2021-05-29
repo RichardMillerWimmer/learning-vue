@@ -3,7 +3,11 @@
   <p>Testing and learning Vue.js</p>
   <input type="text" ref="name" />
   <button @click="handleClick">click me</button>
-  <Popup :header="header" :text="text" theme="sale"/>
+  <div v-if="showPopup">
+    <Popup :header="header" :text="text" theme="sale" @close="togglePopup" />
+  </div>
+  <br>
+  <button @click="togglePopup">popup</button>
 </template>
 
 <script>
@@ -18,7 +22,8 @@ export default {
     return {
       title: "Richard's first Vue app",
       header: "This is the prop header",
-      text: "text prop for p tag"
+      text: "text prop for p tag",
+      showPopup: false,
     };
   },
   methods: {
@@ -27,6 +32,9 @@ export default {
       this.$refs.name.classList.add("active");
       this.$refs.name.focus();
     },
+    togglePopup() {
+      this.showPopup = !this.showPopup
+    }
   },
 };
 </script>

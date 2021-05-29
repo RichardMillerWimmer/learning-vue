@@ -1,5 +1,5 @@
 <template>
-  <div class="backdrop">
+  <div class="backdrop" @click.self="closePopup">
     <div class="popup" :class="{ sale: theme === 'sale'}">
       <h1>{{ header }}</h1>
       <p>{{ text }}</p>
@@ -11,6 +11,11 @@
 export default {
   name: "Popup",
   props: ["header", "text", "theme"],
+  methods: {
+    closePopup() {
+      this.$emit('close')
+    }
+  }
 };
 </script>
 
