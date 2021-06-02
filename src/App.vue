@@ -6,18 +6,19 @@
   <div v-if="showPopup">
     <Popup :header="header" :text="text" theme="sale" @close="togglePopup" />
   </div>
-  <br>
+  <br />
   <button @click="togglePopup">popup</button>
   <div>
     <h1>Ninja Reaction Timer</h1>
     <button @click="ninjaStart" :disabled="isPlaying">play</button>
-    <Block v-if="isPlaying" v-bind:delay="delay"/>
+    <Block v-if="isPlaying" v-bind:delay="delay" @end="endGame" />
+    <p>reaction time: {{ score }}</p>
   </div>
 </template>
 
 <script>
 import Popup from "./components/Popup";
-import Block from "./components/Block"
+import Block from "./components/Block";
 
 export default {
   name: "App",
@@ -31,8 +32,9 @@ export default {
       header: "This is the prop header",
       text: "text prop for p tag",
       showPopup: false,
-      isPlaying: false, 
+      isPlaying: false,
       delay: null,
+      score: null,
     };
   },
   methods: {
@@ -42,13 +44,17 @@ export default {
       this.$refs.name.focus();
     },
     togglePopup() {
-      this.showPopup = !this.showPopup
+      this.showPopup = !this.showPopup;
     },
     ninjaStart() {
-      this.delay = 1000 + Math.random() * 4000
-      this.isPlaying = true
+      this.delay = 1000 + Math.random() * 4000;
+      this.isPlaying = true;
       // console.log(this.delay)
-    }
+    },
+    endGame(reactionTime) {
+      this.score = reactionTime;
+      this.isPlaying = false;
+    },
   },
 };
 </script>

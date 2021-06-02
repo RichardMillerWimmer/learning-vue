@@ -33,6 +33,7 @@ export default {
             // console.log(this.timer)
             clearInterval(this.timer)
             console.log(this.reactionTime)
+            this.$emit('end', this.reactionTime)
         }
     }
     // updated() {
