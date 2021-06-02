@@ -8,15 +8,22 @@
   </div>
   <br>
   <button @click="togglePopup">popup</button>
+  <div>
+    <h1>Ninja Reaction Timer</h1>
+    <button @click="ninjaStart" :disabled="isPlaying">play</button>
+    <Block v-if="isPlaying" v-bind:delay="delay"/>
+  </div>
 </template>
 
 <script>
 import Popup from "./components/Popup";
+import Block from "./components/Block"
 
 export default {
   name: "App",
   components: {
     Popup,
+    Block,
   },
   data() {
     return {
@@ -24,6 +31,8 @@ export default {
       header: "This is the prop header",
       text: "text prop for p tag",
       showPopup: false,
+      isPlaying: false, 
+      delay: null,
     };
   },
   methods: {
@@ -34,6 +43,11 @@ export default {
     },
     togglePopup() {
       this.showPopup = !this.showPopup
+    },
+    ninjaStart() {
+      this.delay = 1000 + Math.random() * 4000
+      this.isPlaying = true
+      // console.log(this.delay)
     }
   },
 };
