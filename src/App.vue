@@ -8,6 +8,7 @@
   </div>
   <br />
   <button @click="togglePopup">popup</button>
+  <SignupForm />
   <div>
     <h1>Ninja Reaction Timer</h1>
     <button @click="ninjaStart" :disabled="isPlaying">play</button>
@@ -21,13 +22,15 @@
 import Popup from "./components/Popup";
 import Block from "./components/Block";
 import Result from "./components/Result";
+import SignupForm from "./components/SignupForm";
 
 export default {
   name: "App",
   components: {
     Popup,
     Block,
-    Result
+    Result,
+    SignupForm
   },
   data() {
     return {
