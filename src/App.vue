@@ -12,19 +12,22 @@
     <h1>Ninja Reaction Timer</h1>
     <button @click="ninjaStart" :disabled="isPlaying">play</button>
     <Block v-if="isPlaying" v-bind:delay="delay" @end="endGame" />
-    <p>reaction time: {{ score }}</p>
+    <!-- <p v-if="showResults">reaction time: {{ score }}</p> -->
+    <Result v-if="showResults" v-bind:score="score" />
   </div>
 </template>
 
 <script>
 import Popup from "./components/Popup";
 import Block from "./components/Block";
+import Result from "./components/Result";
 
 export default {
   name: "App",
   components: {
     Popup,
     Block,
+    Result
   },
   data() {
     return {
@@ -35,6 +38,7 @@ export default {
       isPlaying: false,
       delay: null,
       score: null,
+      showResults: false
     };
   },
   methods: {
@@ -49,11 +53,13 @@ export default {
     ninjaStart() {
       this.delay = 1000 + Math.random() * 4000;
       this.isPlaying = true;
+      this.showResults = false
       // console.log(this.delay)
     },
     endGame(reactionTime) {
       this.score = reactionTime;
       this.isPlaying = false;
+      this.showResults = true
     },
   },
 };
